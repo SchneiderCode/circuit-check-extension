@@ -159,8 +159,8 @@ namespace CircuitCheck {
                 return variable_update.value === "true";
             }
         }
-        //transmit current variable data
-        serial.writeLine("{\"Variable\": {  \"name\":\"" + name + "\",\"value\":"+ variable +",\"type\":" + var_type +  "}}" + delim);
+        //transmit current variable data - surround name with || to better ensure we get the entire name
+        serial.writeLine("{\"Variable\": {  \"name\":\"|" + name + "|\",\"value\":"+ variable +",\"type\":" + var_type +  "}}" + delim);
         return variable;//No update has occured send the old value - Todo: This seems inefficient by adding additional writes to memory...
     }
 
