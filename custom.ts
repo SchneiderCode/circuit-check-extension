@@ -45,6 +45,7 @@ namespace CircuitCheck {
     //% weight=100
     export function runCircuitCheck(userCode: () => void) {
         basic.forever(function () {
+            serial.setBaudRate(BaudRate.BaudRate57600);//A higher baudrate disrupts variable transmissions
             //serial.writeLine("{\"Share_URL\": \"" + url + "\"}" + delim);
             variable_transmitter();//Send current state of variables
             do {
