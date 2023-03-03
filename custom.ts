@@ -159,8 +159,14 @@ namespace CircuitCheck {
                 return variable_update.value === "true";
             }
         }
-        //transmit current variable data - surround name with || to better ensure we get the entire name
-        serial.writeLine("{\"Variable\": {  \"name\":\"|" + name + "|\",\"value\":"+ variable +",\"type\":" + var_type +  "}}" + delim);
+        if(var_type === Type.String){
+            //Similar variable transmission as below (in else), but with the addition of double quotes to ensure the text message is properly parsed as a String.
+            serial.writeLine("{\"Variable\": {  \"name\":\"|" + name + "|\",\"value\":\"" + variable + "\",\"type\":" + var_type + "}}" + delim);
+        }
+        else{
+            //transmit current variable data - surround name with || to better ensure we get the entire name
+            serial.writeLine("{\"Variable\": {  \"name\":\"|" + name + "|\",\"value\":"+ variable +",\"type\":" + var_type +  "}}" + delim);
+        }
         return variable;//No update has occured send the old value - Todo: This seems inefficient by adding additional writes to memory...
     }
 
